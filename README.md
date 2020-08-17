@@ -1,6 +1,6 @@
 # Getting familiar with vis.js
 
-In this lab, you’ll make a small project using the Javascript library vis.js. This library is used extensively in your semester-long project, so getting to know it well is very important! The documentation for vis.js can be found here: <http://visjs.org/docs/network/>
+In this lab, you’ll make a small project using the Javascript library vis.js. This library is used extensively in your semester-long project, so getting to know it well is very important! The documentation for vis.js can be found here: <https://visjs.github.io/vis-network/docs/network/>
 
 Work with your partner on this lab. Practice pair programming. Push your changes to the `vis.html` file when you've finished the whole lab.
 
