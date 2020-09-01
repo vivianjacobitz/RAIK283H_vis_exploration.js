@@ -32,17 +32,86 @@
     // create an array with nodes
     var nodes = new vis.DataSet([{
       id: 1,
-      label: 'Node 1',
+      label: 'Vivian Jacobitz',
+      color: {
+        border: 'orange',
+        background: 'yellow',
+        hightlight: {
+          border: 'orange',
+          background: 'yellow',
+        },
+      },
     }, {
       id: 2,
-      label: 'Node 2',
-    }, ]);
+      label: 'Isabelle Schmidt',
+      color: {
+        border: 'orange',
+        background: 'yellow',
+          border: 'orange',
+          background: 'yellow',
+        },
+      },
+    }, {
+      id: 3,
+      label: 'Grace Clausen',
+    }, {
+      id: 4,
+      label: 'Megan Chaffey',
+    }, {
+      id: 5,
+      label: 'Trinity Thompson',
+    }, {
+      id: 6,
+      label: 'Katie Ledger',
+    }, {
+      id: 7,
+      label: 'Emily Kraai',
+    }, {
+      id: 8,
+      label: 'Kally Karkazis',
+    }, {
+      id: 9,
+      label: 'Nicole Serpico',
+    }, {
+      id: 10,
+      label: 'Anna Krueger',
+    }, {
+      id: 11,
+      label: 'Sophie Hellebusch',
+    },]);
 
     // create an array with edges
     var edges = new vis.DataSet([{
       from: 1,
       to: 2
-    }, ]);
+    }, {
+      from: 1,
+      to: 3
+    }, {
+      from: 2,
+      to: 4
+    }, {
+      from: 3,
+      to: 5
+    }, {
+      from: 4,
+      to: 6
+    }, {
+      from: 5,
+      to: 7
+    }, {
+      from: 7,
+      to: 8
+    }, {
+      from: 8,
+      to: 9
+    }, {
+      from: 9,
+      to: 10
+    }, {
+      from: 10,
+      to: 11
+    }]);
 
     // create a network
     var container = document.getElementById('mynetwork');
@@ -50,11 +119,30 @@
       nodes: nodes,
       edges: edges
     };
-    var options = {};
+    var options = { nodes: { color: { background: 'red', border: 'black' }, shape: 'box' }, edges: { color: { inherit: false } } };
     var network = new vis.Network(container, data, options);
+
+    network.on("click", function(params) {
+      var nodeID = params['nodes']['0'];
+      if (nodeID) {
+        var clickedNode = nodes.get(nodeID);
+        clickedNode.color = {
+          highlight: {
+            border: clickedNode.color.border,
+            background: clickedNode.color.background,
+          },
+        }
+        nodes.update(clickedNode);
+      }
+    });
+
+    console.log(nodes.get(1).label + " or node of id 1 has the following connected nodes: ");
+    let connectedNodes = network.getConnectedNodes(1);
+    for(let i = 0; i < connectedNodes.length; i++) {
+      console.log("\t" + nodes.get(connectedNodes[i]).label + " or node of id " + nodes.get(connectedNodes[i]).id);
+    }
+
   </script>
-
-
 
 
 </body>
