@@ -123,9 +123,25 @@
     var options = { nodes: { color: { background: 'red', border: 'black' }, shape: 'box' }, edges: { color: { inherit: false } } };
     var network = new vis.Network(container, data, options);
 
+    // Accounts for color not changing when a main node is clicked.
     network.on("click", function(params) {
       var nodeID = params['nodes']['0'];
-      if (nodeID) {
+      if (nodeID == 1 || nodeID == 2) {
+        var clickedNode = nodes.get(nodeID);
+        clickedNode.color = {
+          highlight: {
+            border: clickedNode.color.border,
+            background: clickedNode.color.background,
+          },
+        }
+        nodes.update(clickedNode);
+      }
+    });
+
+    // Accounts for color not changing when a main node is dragged.
+    network.on("dragging", function(params) {
+      var nodeID = params['nodes']['0'];
+      if (nodeID == 1 || nodeID == 2) {
         var clickedNode = nodes.get(nodeID);
         clickedNode.color = {
           highlight: {
